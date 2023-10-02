@@ -25,20 +25,30 @@ const contactsSlice = createSlice({
         return { payload: { name, number, id: nanoid() } };
       },
     },
+    // deleteContact: {
+    //   reducer(state, action) {
+    //     const index = state.contactsArray.findIndex(
+    //       contact => contact.id === action.payload
+    //     );
+    //     state.contactsArray.splice(index, 1);
+    //   },
+    //   prepare({ id }) {
+    //     return { payload: { id } };
+    //   },
+    // },
+
     deleteContact: (state, action) => {
       const index = state.contactsArray.findIndex(
         contact => contact.id === action.payload
       );
       state.contactsArray.splice(index, 1);
-
-      // return state.contactsArray.filter(
-      //   contact => contact.id !== action.payload
-      // );
     },
   },
 });
 
 export const { addContact, deleteContact } = contactsSlice.actions;
+console.log(addContact({ name: '12wer3', number: 123 }));
+console.log(deleteContact({ id: 13 }));
 
 const persistConfig = {
   key: 'contacts',
