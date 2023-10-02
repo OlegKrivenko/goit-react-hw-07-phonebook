@@ -3,12 +3,16 @@ import { persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';
 
 const initialState = {
-  contactsArray: [
-    { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
-  ],
+  contacts: {
+    items: [
+      { id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
+      { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
+      { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
+      { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },
+    ],
+    isLoading: false,
+    error: null,
+  },
 };
 
 const contactsSlice = createSlice({
@@ -17,9 +21,9 @@ const contactsSlice = createSlice({
   reducers: {
     addContact: {
       reducer(state, action) {
-        state.contactsArray.push(action.payload);
+        state.contacts.items.push(action.payload);
 
-        // return [...state.contactsArray, action.payload];
+        // return [...state.contacts, action.payload];
       },
       prepare({ name, number }) {
         return { payload: { name, number, id: nanoid() } };
@@ -27,10 +31,10 @@ const contactsSlice = createSlice({
     },
     // deleteContact: {
     //   reducer(state, action) {
-    //     const index = state.contactsArray.findIndex(
+    //     const index = state.contacts.findIndex(
     //       contact => contact.id === action.payload
     //     );
-    //     state.contactsArray.splice(index, 1);
+    //     state.contacts.splice(index, 1);
     //   },
     //   prepare({ id }) {
     //     return { payload: { id } };
@@ -38,24 +42,24 @@ const contactsSlice = createSlice({
     // },
 
     deleteContact: (state, action) => {
-      const index = state.contactsArray.findIndex(
+      const index = state.contacts.items.findIndex(
         contact => contact.id === action.payload
       );
-      state.contactsArray.splice(index, 1);
+      state.contacts.items.splice(index, 1);
     },
   },
 });
 
 export const { addContact, deleteContact } = contactsSlice.actions;
-console.log(addContact({ name: '12wer3', number: 123 }));
-console.log(deleteContact({ id: 13 }));
 
-const persistConfig = {
-  key: 'contacts',
-  storage,
-};
+export const contactsReducer = contactsSlice.reducer;
 
-export const contactsReducer = persistReducer(
-  persistConfig,
-  contactsSlice.reducer
-);
+// const persistConfig = {
+//   key: 'contacts',
+//   storage,
+// };
+
+// export const contactsReducer = persistReducer(
+//   persistConfig,
+//   contactsSlice.reducer
+// );
