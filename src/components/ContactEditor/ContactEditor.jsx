@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
 import css from './ContactEditor.module.css';
 
 const ContactEditor = () => {
@@ -31,16 +31,13 @@ const ContactEditor = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-
     const isExist = contacts.find(
       contact => contact.name.toLowerCase() === name.toLowerCase()
     );
-
     if (isExist) {
       Notify.failure(`${name} is already in contacts`);
       return;
     }
-
     dispatch(addContact({ name, number }));
     resetForm();
   };
