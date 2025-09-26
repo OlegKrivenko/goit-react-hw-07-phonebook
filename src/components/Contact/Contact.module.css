@@ -1,17 +1,20 @@
 .contact:not(:last-child) {
-   margin-bottom: 5px;
+  margin-bottom: 5px;
+}
+.contact:last-child {
+  margin-bottom: 10px;
 }
 .box {
-   display: flex;
-   justify-content: space-between;
-   width: 270px;
+  display: flex;
+  justify-content: space-between;
+  width: 410px;
 }
 .button {
-   background-color: white;
-   border-radius: 3px;
-   border: 1px solid grey;
+  background-color: white;
+  border-radius: 3px;
+  border: 1px solid grey;
 }
 .button:focus,
 .button:hover {
-   background-color: rgb(219, 219, 219);
+  background-color: rgb(219, 219, 219);
 }

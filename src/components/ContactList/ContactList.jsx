@@ -1,7 +1,9 @@
 import css from './ContactList.module.css';
 import Contact from '../Contact';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { getContacts, getFilter } from 'redux/selectors';
+import { useEffect } from 'react';
+import { fetchContacts } from 'redux/operations';
 
 const getVisibleContacts = (contacts, filter) => {
   const normalizedFilter = filter.toLowerCase();
