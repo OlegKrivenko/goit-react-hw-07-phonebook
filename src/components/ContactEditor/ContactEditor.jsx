@@ -2,12 +2,13 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Notify } from 'notiflix';
 import { getContacts } from 'redux/selectors';
-import { addContact } from 'redux/contactsSlice';
+import { addContact } from 'redux/operations';
+
 import css from './ContactEditor.module.css';
 
 const ContactEditor = () => {
   const [name, setName] = useState('');
-  const [number, setNumber] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
 
   const dispatch = useDispatch();
   const contacts = useSelector(getContacts);
@@ -20,8 +21,8 @@ const ContactEditor = () => {
         setName(value);
         break;
 
-      case 'number':
-        setNumber(value);
+      case 'phoneNumber':
+        setPhoneNumber(value);
         break;
 
       default:
@@ -41,13 +42,13 @@ const ContactEditor = () => {
       return;
     }
 
-    dispatch(addContact({ name, number }));
+    dispatch(addContact({ name, phoneNumber }));
     resetForm();
   };
 
   const resetForm = () => {
     setName('');
-    setNumber('');
+    setPhoneNumber('');
   };
 
   return (
@@ -71,12 +72,12 @@ const ContactEditor = () => {
         <input
           className={css.input}
           type="tel"
-          name="number"
+          name="phoneNumber"
           pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          title="Phone phoneNumber must be digits and can contain spaces, dashes, parentheses and can start with +"
           required
           onChange={handleChange}
-          value={number}
+          value={phoneNumber}
         />
       </label>
 

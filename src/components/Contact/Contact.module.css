@@ -7,7 +7,7 @@
 .box {
   display: flex;
   justify-content: space-between;
-  width: 410px;
+  width: 480px;
 }
 .button {
   background-color: white;
